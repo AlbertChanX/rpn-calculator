@@ -3,8 +3,9 @@ package com.chanx.rpn;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Iterator;
 
 
 public class RPNCalculator {
@@ -88,12 +89,12 @@ public class RPNCalculator {
     }
 
     public String getDisplayedStack() {
-        String ret = "stack:";
+        StringBuilder ret = new StringBuilder("stack:");
         Iterator<BigDecimal> it = numbers.descendingIterator();
         while (it.hasNext()) {
-            ret += " " + it.next();
+            ret.append(" ").append(formatDecimal(it.next()));
         }
-        return ret;
+        return ret.toString();
     }
 
     private void basicOperate(OperationEnum operation) {
